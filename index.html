@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'/>
+		<title>This page</title>
+		<script type='text/javascript' src='jquery-2.1.4.min.js'></script>
+		<script type='text/javascript' src='jquery.controller.js'></script>
+		<style type='text/css'>
+			body { overflow: hidden; }
+			#game {
+				overflow: hidden;
+				position: relative; 
+				font-size: 0px; 
+				width: 640px; 
+				height: 480px; 
+				background-color: #ddd;
+				border: 1px solid #ccc;
+			}
+			#p1, #p2 {
+				position: absolute;
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+			}
+			#p1 {
+				top: 0;
+				left: 0;
+				background-color: #b30000;				
+			}
+			#p2 {
+				bottom: 0;
+				right: 0;
+				background-color: #0000b3;				
+			}
+		</style>
+	</head>
+	<body>
+		<div id='game'>
+			<div id='p1'></div>
+			<div id='p2'></div>
+		</div>
+		<script type='text/javascript'>
+			var p1 = $('#p1').controller({
+				left: 37, up: 38, right: 39, down: 40
+			});
+			var p2 = $('#p2').controller({
+				left: 65, up: 87, right: 68, down: 83
+			});
+			var fps = 60;
+			var fnPlayer = function() {
+				var x = 0, y = 0;
+				if (this.keys.left) x -= 1;
+				if (this.keys.up) y -= 1;
+				if (this.keys.right) x += 1;
+				if (this.keys.down) y += 1;
+				this.obj.translate(x, y);
+			};
+			p1.update(fnPlayer, fps);
+			p2.update(fnPlayer, fps);
+		</script>
+	</body>
+</html>
